@@ -52,7 +52,7 @@ class MainPage(BaseHandler):
     top_songs, top_albums = Play.get_top(start, end, song_num, album_num)
     posts = BlogPost.get_last(num=3)
     events = Event.get_upcoming(num=3)
-
+    
     template_values = {
       'news_selected': True,
       'flash': self.flashes,
@@ -603,12 +603,20 @@ class HistoryPage(BaseHandler):
 class WeekPage(BaseHandler):
   def get(self):
     week = self.request.get('week')
+    djotw_files = []
+    djotw_names = []
+    for file in sorted(os.listdir("."), reverse=True):
+        if file.startswith("djoftheweek_2"):
+            djotw_files.append(file[12:22])
+            djotw_names.append(file[17:19]+'/'+file[20:22]+'/'+file[12:16])
+
     template_values = {
       'week_selected': True,
       'session': self.session,
+      'djotw_archives': zip(djotw_files, djotw_names),
     }
     if len(week) == 0:
-        self.response.out.write(template.render(get_path("djoftheweek.html"), template_values))
+        self.response.out.write(template.render(get_path("djoftheweek_"+djotw_files[0]+".html"), template_values))
     else:
         self.response.out.write(template.render(get_path("djoftheweek_%s.html" % week), template_values))
 
@@ -662,7 +670,7 @@ class SignUp(BaseHandler):
         self.session.add_flash(
           "The secret registration token you have entered is either "
           "invalid, or has already been used up. Double check that "
-          "it is correct. If it is not, <a>contact Ruben</a>.",
+          "it is correct. If it is not, <a href='mailto:rmartin@bowdoin.edu'>contact Ruben</a>.",
           level="error")
         self.redirect("/signup?token=%s"%token_str)
         return

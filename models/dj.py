@@ -278,6 +278,20 @@ class Dj(Searchable, NewCacheable):
   def fullname(self, fullname):
     self._old_lowername = self.raw.lowername
     self.raw.fullname = fullname.strip()
+  @property
+
+  #password reset attributes
+  def pw_reset_expire(self):
+    return self.raw.pw_reset_expire
+  @pw_reset_expire.setter
+  def pw_reset_expire(self, pw_reset_expire):
+    self.raw.pw_reset_expire = pw_reset_expire
+  @property
+  def pw_reset_hash(self):
+    return self.raw.pw_reset_hash
+  @pw_reset_hash.setter
+  def pw_reset_hash(self, pw_reset_hash):
+    self.raw.pw_reset_hash = pw_reset_hash
 
   @property
   def username(self):

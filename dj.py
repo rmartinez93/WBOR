@@ -19,6 +19,8 @@ import datetime
 import time
 import logging
 import json
+import random
+import string
 
 from google.appengine.api import urlfetch
 from google.appengine.api import mail
@@ -161,9 +163,9 @@ class Login(UserHandler):
     self.user = dj
     program_list = Program.get_by_dj(dj=dj, num=10)
     if not program_list:
-      self.session.add_flash("You have successfully logged in,"
-                    "but you have no associated programs."
-                    "You will not be able to do much until"
+      self.session.add_flash("You have successfully logged in, "
+                    "but you have no associated programs. "
+                    "You will not be able to do much until "
                     "you have a program.", level="success")
       self.redirect('/dj/')
       return
@@ -177,7 +179,7 @@ class Login(UserHandler):
       self.redirect("/dj/selectprogram/?skip=1")
       return
 
-# Lets a DJ reset his password (to a randomly generated code)
+# Lets a DJ reset their password (to a randomly generated code)
 # get(): display a username entry form
 # post(): submit the username entry form and send an email to the dj.
 class RequestPassword(UserHandler):
@@ -194,8 +196,8 @@ class RequestPassword(UserHandler):
         self.redirect("/dj/reset/")
         return
       except InvalidLogin:
-        self.flash = ("This request is no longer valid, or the key provided"
-                      "is somehow corrupt. If clicking the link in your email"
+        self.flash = ("This request is no longer valid, or the key provided "
+                      "is somehow corrupt. If clicking the link in your email "
                       "does not work again, perhaps request a new reset.")
         self.redirect("/dj/reset")
         return
@@ -210,7 +212,7 @@ class RequestPassword(UserHandler):
         self.session.add_flash(
           "You will not be able to do much until you have a"
           "program.  If you see this message, please email"
-          "<a href='mailto:cmsmith@bowdoin.edu'>Ruben</a>"
+          "<a href='mailto:rmartin@bowdoin.edu'>Ruben</a>"
           "immediately.")
         self.redirect('/dj/myself')
         return
@@ -821,11 +823,8 @@ class MySelf(UserHandler):
       self.redirect("/dj/myself")
       return
 
-    if error:
-      self.redirect("/dj/myself")
-      return
     if self.request.get("password"):
-      if not self.request.get("password") == self.request.get("confirm"):
+      if self.request.get("password") != self.request.get("confirm"):
         self.session.add_flash("New passwords do not match.")
         self.redirect("/dj/myself")
         return

@@ -147,7 +147,7 @@ function nowPlaying() {
     <div class="modal fade" id="call-me-modal">
       <div class="modal-header">
         <a class="close" data-dismiss="modal">&times;</a>
-        <h3>Call us!</h3>
+        <h3>Call WBOR!</h3>
       </div>
       <div class="modal-body">
         <p>Enter in your name and phone number, and Google
@@ -199,9 +199,8 @@ function nowPlaying() {
               <div class="pull-right">
                 <a class="btn btn-primary btn-large"
                    data-toggle="modal"
-                   href="#call-me-modal"
-                   style="display:block;margin-bottom:5px;">
-                  <strong>Call us!</strong>
+                   href="#call-me-modal">
+                  <strong>Call WBOR!</strong>
                 </a>
                 <a href='/static/wbor.m3u' class="btn btn-listen
                                                   btn-large">
@@ -334,15 +333,15 @@ function nowPlaying() {
             <ul class="pull-right" style="margin:0;">
                 {% if "dj" in session %}
                 <form class="navbar-form pull-right">
-                  <a class="btn btn-wbor" href="/dj/chartsong">Chart
+                  <a class="btn btn-primary btn-wbor" href="/dj/chartsong">Chart
                     Song</a>
                 </form>
                 {% endif %}
             </ul>
             <div class="container" id='nowplaying'>
-               <ul id=marquee class="nav pull-left" behavior="scroll" scrollamount="2" direction="left" 
+               <ul id=marquee class="nav pull-left" behavior="scroll" scrollamount="2" direction="left" height="40" 
                    {% if "dj" in session %}
-                    width="890" height="40">
+                    width="885">
                    {% else %}
                     width="980">
                    {% endif %}
