@@ -600,25 +600,14 @@ class HistoryPage(BaseHandler):
     self.response.out.write(
       template.render(get_path("history.html"), template_values))
     
-class WeekPage(BaseHandler):
+class DownloadPage(BaseHandler):
   def get(self):
-    week = self.request.get('week')
-    djotw_files = []
-    djotw_names = []
-    for file in sorted(os.listdir("."), reverse=True):
-        if file.startswith("djoftheweek_2"):
-            djotw_files.append(file[12:22])
-            djotw_names.append(file[17:19]+'/'+file[20:22]+'/'+file[12:16])
-
     template_values = {
-      'week_selected': True,
+      'download_selected': True,
       'session': self.session,
-      'djotw_archives': zip(djotw_files, djotw_names),
     }
-    if len(week) == 0:
-        self.response.out.write(template.render(get_path("djoftheweek_"+djotw_files[0]+".html"), template_values))
-    else:
-        self.response.out.write(template.render(get_path("djoftheweek_%s.html" % week), template_values))
+    self.response.out.write(
+			template.render(get_path("download.html"), template_values))
 
 class ContactPage(BaseHandler):
   def get(self):
@@ -764,7 +753,7 @@ app = webapp2.WSGIApplication([
   ('/history/?', HistoryPage),
   ('/contact/?', ContactPage),
   ('/events/?', EventPage),
-  ('/week/?', WeekPage),
+  ('/download/?', DownloadPage),
   ('/albums/([^/]*)/?', ViewCoverHandler),
   ('/callvoice/?', CallVoice),
   ('/testmodels/?', TestModels),
