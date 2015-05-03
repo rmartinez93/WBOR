@@ -506,8 +506,12 @@ class ViewLogs(UserHandler):
       self.redirect("/dj/logs/")
       return
     end = start + datetime.timedelta(weeks=2)
-    psas = Psa.get(after=start, before=end) # TODO: Cache?
-    ids = StationId.get(after=start, before=end) #TODO: Cache
+    psas = Psa.get_last(num=1000, after=start, before=end) #TODO: There's gotta be a better way to do this, but haven't found it
+    ids = StationID.get_last(num=1000, after=start, before=end) #TODO: See above. Need to get psas/station_ids between dates, no num limit
+    if type(ids) is not list:
+      ids = [ids]
+    if type(psas) is not list:
+      psas = [psas]
     template_values = {
       'session': self.session,
       'flash': self.flashes,
