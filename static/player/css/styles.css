@@ -1,0 +1,126 @@
+.spinner {
+		position: relative;
+		width: 30px;
+		background-color: #333;
+		color:#fff;
+		font-weight:bold;
+		text-align:center;
+		height:30px;
+		line-height: 30px;
+		margin-left: 50px;
+		margin-bottom: 5px;
+		-webkit-animation: rotateplane 0.7s infinite ease-in-out;
+		animation: rotateplane 0.7s infinite ease-in-out;
+}
+@-webkit-keyframes rotateplane {
+		0% { -webkit-transform: perspective(120px) }
+		50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+		100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+}
+@keyframes rotateplane {
+		0% {
+				transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+				-webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+		} 50% {
+					transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+					-webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+			} 100% {
+						transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+						-webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+				}
+}
+body {
+		background-color: #FFF;
+		font-family: sans-serif;
+		margin-bottom: 0px;
+		width: 340px;
+		height: 505px;
+		overflow: scroll;
+		padding: 0;
+		margin: 0;
+}
+#player-wrapper {
+    background-color: #007FFF;
+		min-height: 505px;
+    padding: 20px 25px 20px 20px;
+}
+small {
+		background-color:#fff;
+		padding:5px 0;
+}
+a, button {
+		cursor:pointer;
+		text-decoration:none;
+		outline: none;
+}
+#wrapper {
+		position: fixed;
+    bottom: 0;
+		width: 340px;
+		background-color:#e9e6ff;
+		padding-top: 5px;
+		margin-left: -20px;
+		margin-right: -20px;
+}
+#start, #stop {
+		height: 50px;
+		width: 50px;
+		border: none;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-color: #FFF;
+		display: inline-block;
+}
+#start {
+		background-image: url("../img/play.png");
+		background-color: #e9e6ff;
+}
+#start.active {
+		background-image: url("../img/play2.png");
+		background-color: #e9e6ff;
+}
+#stop {
+		background-image: url("../img/pause.png");
+		background-color: #e9e6ff;
+}
+#stop.active {
+		background-image: url("../img/pause2.png");
+		background-color: #e9e6ff;
+}
+#info {
+		display: inline-block;
+		overflow: hidden;
+		padding-bottom: 5px;
+		width: 150px;
+}
+#artist,#song {
+		width: 150px;
+		max-height: 25px;
+		margin: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap; 
+}
+#song {
+		font-weight: bold;
+}
+img {
+		width: 100%;
+}
+#record.rotate {
+		width: 80%;
+		padding: 10%;
+		-webkit-animation-name: rotate; 
+		-webkit-animation-duration: 2s; 
+		-webkit-animation-iteration-count: infinite;
+		-webkit-animation-timing-function: linear;
+		-webkit-animation-play-state: paused;
+}
+#record.play {
+		-webkit-animation-play-state: running !important;
+}
+@-webkit-keyframes rotate {
+		from {-webkit-transform: rotate(0deg);}
+		to {-webkit-transform: rotate(360deg);}
+}
