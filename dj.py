@@ -212,7 +212,7 @@ class RequestPassword(UserHandler):
         self.session.add_flash(
           "You will not be able to do much until you have a"
           "program.  If you see this message, please email"
-          "<a href='mailto:rmartin@bowdoin.edu'>Ruben</a>"
+          "<a href='mailto:nmorin@bowdoin.edu'>Nicole Morin</a>"
           "immediately.")
         self.redirect('/dj/myself')
         return

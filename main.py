@@ -659,7 +659,7 @@ class SignUp(BaseHandler):
         self.session.add_flash(
           "The secret registration token you have entered is either "
           "invalid, or has already been used up. Double check that "
-          "it is correct. If it is not, <a href='mailto:rmartin@bowdoin.edu'>contact Ruben</a>.",
+          "it is correct. If it is not, <a href='mailto:nmorin@bowdoin.edu'>contact Nicole Morin</a>.",
           level="error")
         self.redirect("/signup?token=%s"%token_str)
         return
